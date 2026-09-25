@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pantry_background"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_title"
+        android:textColor="@color/pantry_primary"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/settings_subtitle"
+        android:textColor="@color/pantry_text_secondary" />
+
+    <Switch
+        android:id="@+id/switchExpiryAlerts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/expiry_alerts"
+        android:textColor="@color/pantry_text"
+        android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/buttonSaveSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/save_settings"
+        android:textAllCaps="false" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/navPantrySettings"
+            style="@style/Widget.SmartPantry.NavigationButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/nav_pantry" />
+
+        <Button
+            android:id="@+id/navSuggestionsSettings"
+            style="@style/Widget.SmartPantry.NavigationButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/nav_suggestions" />
+    </LinearLayout>
+</LinearLayout>

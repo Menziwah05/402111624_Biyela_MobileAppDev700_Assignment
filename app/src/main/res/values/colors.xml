@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pantry_primary">#326B57</color>
+    <color name="pantry_primary_dark">#214A3B</color>
+    <color name="pantry_accent">#E09F3E</color>
+    <color name="pantry_background">#F7F4EC</color>
+    <color name="pantry_surface">#FFFFFF</color>
+    <color name="pantry_border">#D7DED5</color>
+    <color name="pantry_text">#20312A</color>
+    <color name="pantry_text_secondary">#66756D</color>
+    <color name="white">#FFFFFF</color>
+</resources>
