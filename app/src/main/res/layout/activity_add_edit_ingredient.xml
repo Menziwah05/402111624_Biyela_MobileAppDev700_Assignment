@@ -47,7 +47,8 @@
             android:id="@+id/inputIngredientExpiry"
             style="@style/Widget.SmartPantry.Input"
             android:hint="@string/expiry_hint"
-            android:inputType="text" />
+            android:inputType="date"
+            android:maxLength="10" />
 
         <LinearLayout
             android:layout_width="match_parent"

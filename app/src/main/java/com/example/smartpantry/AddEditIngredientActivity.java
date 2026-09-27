@@ -1,7 +1,6 @@
 package com.example.smartpantry;
 
 import android.os.Bundle;
-import android.text.InputType;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartpantry.data.DatabaseHelper;
 import com.example.smartpantry.model.PantryItem;
+import com.example.smartpantry.util.ValidationUtils;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class AddEditIngredientActivity extends AppCompatActivity {
@@ -99,8 +97,8 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             quantityInput.requestFocus();
             return;
         }
-        if (!expiryDate.isEmpty() && !isValidExpiryDate(expiryDate)) {
-            expiryInput.setError("Use a valid date in YYYY-MM-DD format");
+        if (!expiryDate.isEmpty() && !ValidationUtils.isValidExpiryDate(expiryDate)) {
+            expiryInput.setError("Enter a real date in YYYY-MM-DD format, for example 2026-09-30");
             expiryInput.requestFocus();
             return;
         }
@@ -114,17 +112,5 @@ public class AddEditIngredientActivity extends AppCompatActivity {
             Toast.makeText(this, "Pantry item added", Toast.LENGTH_SHORT).show();
         }
         finish();
-    }
-
-    private boolean isValidExpiryDate(String value) {
-        if (!value.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            return false;
-        }
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ROOT);
-        dateFormat.setLenient(false);
-        ParsePosition position = new ParsePosition(0);
-        return dateFormat.parse(value, position) != null
-                && position.getIndex() == value.length();
     }
 }
