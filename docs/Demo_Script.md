@@ -16,8 +16,10 @@ video.
 
 1. Launch the application and show the seeded pantry list.
 2. Open **Add ingredient**.
-3. Try to save with an empty name or invalid quantity and show validation.
-4. Add an ingredient such as `Tomatoes`, quantity `500`, unit `g`.
+3. Try to save with an empty name, invalid quantity, or an impossible expiry
+   date such as `2026-02-30`; show the inline error messages.
+4. Add an ingredient such as `Tomatoes`, quantity `500`, unit `g`, and a valid
+   date such as `2026-09-30`.
 5. Edit the new ingredient and change its quantity.
 6. Delete the ingredient and confirm that the list updates.
 7. Open **Recipes** and show the strict suggestions.
@@ -55,6 +57,8 @@ Show `IngredientMatcher.java` and explain:
 - Insufficient quantities reject the recipe.
 - Simple plural forms are normalized.
 - Compatible units are converted before comparison.
+- Incompatible count units, such as pieces and slices, are not treated as
+  interchangeable.
 
 Finish by explaining that SQLite was chosen because the app is local-first,
 does not need a server or account system, and must persist pantry data between

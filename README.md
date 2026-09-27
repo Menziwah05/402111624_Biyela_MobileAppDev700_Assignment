@@ -13,14 +13,16 @@ can be made immediately from those ingredients.
 - Full pantry CRUD: create, read, update, and delete.
 - Custom `RecyclerView.Adapter` for pantry items and recipes.
 - Intent navigation between Activities.
-- Form validation for name, quantity, unit, and optional expiry-date format.
+- Form validation for name, quantity, and unit.
+- Optional expiry dates are validated as real calendar dates in `YYYY-MM-DD`
+  format, with an inline error shown before saving invalid input.
 - 18 pre-loaded recipes with ingredients and preparation steps.
 - Strict matching checks every recipe ingredient and required quantity.
 - Ingredient matching handles common plural forms such as `tomato` and
   `tomatoes`.
-- Common units are converted before comparison, including g/kg and ml/l.
+- Compatible units are converted before comparison, including g/kg and ml/l;
+  incompatible count units such as pieces and slices are not mixed.
 - Empty suggestions feedback instead of a blank screen.
-- Invalid expiry dates are rejected with a clear `YYYY-MM-DD` error message.
 - No maps, GPS, location, shopping, payment, or external recipe API features.
 
 ## Open and run
@@ -34,6 +36,18 @@ The app uses SQLite on the device. The first database creation seeds a small
 sample pantry and 18 recipes so the recipe screen has useful content on the
 first launch. Users can edit or delete the sample ingredients and add their
 own.
+
+## Verification
+
+Run the local Java tests from the project root:
+
+```bash
+./gradlew test
+```
+
+The tests cover impossible dates, the required date format, missing recipe
+ingredients, metric unit conversion, plural ingredient names, and incompatible
+count units.
 
 ## How the strict rule works
 
