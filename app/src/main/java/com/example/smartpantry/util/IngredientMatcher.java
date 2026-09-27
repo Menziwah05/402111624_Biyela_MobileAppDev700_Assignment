@@ -33,7 +33,9 @@ public final class IngredientMatcher {
     }
 
     public static String normalizeName(String rawName) {
-        String name = rawName.toLowerCase(Locale.ROOT).trim().replaceAll("\\s+", " ");
+        String name = rawName.toLowerCase(Locale.ROOT).trim()
+                .replaceAll("[^a-z0-9 ]", "")
+                .replaceAll("\\s+", " ");
         if (name.endsWith("ies") && name.length() > 3) {
             return name.substring(0, name.length() - 3) + "y";
         }
@@ -47,36 +49,69 @@ public final class IngredientMatcher {
     }
 
     private static boolean compatibleUnits(String first, String second) {
-        return unitCategory(first).equals(unitCategory(second));
+        String firstUnit = normalizeUnit(first);
+        String secondUnit = normalizeUnit(second);
+        if (firstUnit.equals(secondUnit)) {
+            return true;
+        }
+        return unitCategory(firstUnit).equals(unitCategory(secondUnit))
+                && (unitCategory(firstUnit).equals("weight")
+                || unitCategory(firstUnit).equals("volume"));
     }
 
     private static String unitCategory(String unit) {
-        String normalized = unit.toLowerCase(Locale.ROOT).trim();
-        if (normalized.equals("kg") || normalized.equals("g") ||
-                normalized.equals("gram") || normalized.equals("grams")) {
+        String normalized = normalizeUnit(unit);
+        if (normalized.equals("kg") || normalized.equals("g")) {
             return "weight";
         }
         if (normalized.equals("l") || normalized.equals("ml") ||
-                normalized.equals("litre") || normalized.equals("liter") ||
                 normalized.equals("cup") || normalized.equals("tbsp") ||
                 normalized.equals("tsp")) {
             return "volume";
         }
-        return "count";
+        return "count:" + normalized;
+    }
+
+    private static String normalizeUnit(String unit) {
+        String normalized = unit.toLowerCase(Locale.ROOT).trim();
+        switch (normalized) {
+            case "kilogram":
+            case "kilograms":
+                return "kg";
+            case "gram":
+            case "grams":
+                return "g";
+            case "litre":
+            case "litres":
+            case "liter":
+            case "liters":
+                return "l";
+            case "millilitre":
+            case "millilitres":
+            case "milliliter":
+            case "milliliters":
+                return "ml";
+            case "piece":
+            case "pieces":
+            case "pc":
+            case "pcs":
+                return "piece";
+            case "slice":
+            case "slices":
+                return "slice";
+            default:
+                return normalized;
+        }
     }
 
     private static double toBaseQuantity(double quantity, String unit) {
-        String normalized = unit.toLowerCase(Locale.ROOT).trim();
+        String normalized = normalizeUnit(unit);
         switch (normalized) {
             case "kg":
                 return quantity * 1000;
             case "g":
-            case "gram":
-            case "grams":
                 return quantity;
             case "l":
-            case "litre":
-            case "liter":
                 return quantity * 1000;
             case "cup":
                 return quantity * 240;
@@ -85,6 +120,7 @@ public final class IngredientMatcher {
             case "tsp":
                 return quantity * 5;
             case "ml":
+                return quantity;
             default:
                 return quantity;
         }
