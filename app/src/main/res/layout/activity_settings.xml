@@ -52,6 +52,7 @@
             android:id="@+id/navPantrySettings"
             style="@style/Widget.SmartPantry.NavigationButton"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nav_pantry" />
 
@@ -59,6 +60,7 @@
             android:id="@+id/navSuggestionsSettings"
             style="@style/Widget.SmartPantry.NavigationButton"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nav_suggestions" />
     </LinearLayout>

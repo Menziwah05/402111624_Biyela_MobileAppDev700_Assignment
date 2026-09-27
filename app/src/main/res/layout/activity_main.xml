@@ -59,6 +59,7 @@
             android:id="@+id/navPantry"
             style="@style/Widget.SmartPantry.NavigationButton"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nav_pantry" />
 
@@ -66,6 +67,7 @@
             android:id="@+id/navSuggestions"
             style="@style/Widget.SmartPantry.NavigationButton"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nav_suggestions" />
 
@@ -73,6 +75,7 @@
             android:id="@+id/navSettings"
             style="@style/Widget.SmartPantry.NavigationButton"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/nav_settings" />
     </LinearLayout>

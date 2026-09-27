@@ -13,13 +13,14 @@ can be made immediately from those ingredients.
 - Full pantry CRUD: create, read, update, and delete.
 - Custom `RecyclerView.Adapter` for pantry items and recipes.
 - Intent navigation between Activities.
-- Form validation for name, quantity, and unit.
+- Form validation for name, quantity, unit, and optional expiry-date format.
 - 18 pre-loaded recipes with ingredients and preparation steps.
 - Strict matching checks every recipe ingredient and required quantity.
 - Ingredient matching handles common plural forms such as `tomato` and
   `tomatoes`.
 - Common units are converted before comparison, including g/kg and ml/l.
 - Empty suggestions feedback instead of a blank screen.
+- Invalid expiry dates are rejected with a clear `YYYY-MM-DD` error message.
 - No maps, GPS, location, shopping, payment, or external recipe API features.
 
 ## Open and run
