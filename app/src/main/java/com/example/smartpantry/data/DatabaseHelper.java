@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "smart_pantry.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_PANTRY = "pantry_items";
     private static final String TABLE_RECIPES = "recipes";
@@ -39,15 +39,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(recipe_id) REFERENCES recipes(id) ON DELETE CASCADE)");
 
         seedRecipes(db);
+        seedSouthAfricanRecipes(db);
         seedPantry(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS recipe_ingredients");
-        db.execSQL("DROP TABLE IF EXISTS recipes");
-        db.execSQL("DROP TABLE IF EXISTS pantry_items");
-        onCreate(db);
+        // Add the new recipe catalogue without deleting a user's existing pantry.
+        if (oldVersion < 2) {
+            seedSouthAfricanRecipes(db);
+        }
     }
 
     public long insertPantryItem(PantryItem item) {
@@ -256,6 +257,88 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Cook tomatoes, stir in milk and cheese, then toss with pasta.",
                 new String[][]{{"pasta", "200", "g"}, {"tomatoes", "200", "g"},
                         {"milk", "150", "ml"}, {"cheese", "40", "g"}});
+    }
+
+    private void seedSouthAfricanRecipes(SQLiteDatabase db) {
+        addRecipe(db, "Chakalaka",
+                "Heat the oil and soften the onion, garlic, green pepper and grated carrots. " +
+                        "Add tomatoes and curry powder and cook until the vegetables soften. " +
+                        "Stir in the baked beans and sugar, then simmer until thick. Serve as " +
+                        "a relish with pap, bread or braai food.",
+                new String[][]{{"vegetable oil", "30", "ml"}, {"onion", "1", "pieces"},
+                        {"garlic", "2", "cloves"}, {"green pepper", "1", "pieces"},
+                        {"carrots", "2", "pieces"}, {"tomatoes", "300", "g"},
+                        {"curry powder", "1.5", "tbsp"}, {"baked beans", "400", "g"},
+                        {"sugar", "20", "g"}});
+
+        addRecipe(db, "Pap and Boerewors",
+                "Bring the water and salt to a boil. Slowly stir in the maize meal, cover " +
+                        "and cook over low heat, stirring occasionally, until thick and cooked. " +
+                        "Grill or pan-cook the boerewors until browned and cooked through. Serve " +
+                        "the boerewors with pap.",
+                new String[][]{{"water", "1500", "ml"}, {"maize meal", "500", "g"},
+                        {"salt", "5", "g"}, {"boerewors", "500", "g"}});
+
+        addRecipe(db, "Bobotie",
+                "Soak the bread in some of the milk. Brown the lamb mince with onion, then " +
+                        "stir in curry powder, raisins and chutney. Mix in the soaked bread " +
+                        "and place in a baking dish. Beat the eggs with the remaining milk, " +
+                        "pour over the mince and bake until the egg topping is set and golden.",
+                new String[][]{{"lamb mince", "500", "g"}, {"onion", "1", "pieces"},
+                        {"bread", "1", "slices"}, {"milk", "250", "ml"},
+                        {"eggs", "2", "pieces"}, {"curry powder", "1", "tbsp"},
+                        {"raisins", "50", "g"}, {"apricot chutney", "30", "g"}});
+
+        addRecipe(db, "Chicken Bunny Chow",
+                "Warm the oil and cook the onion and garlic until soft. Add curry powder and " +
+                        "chicken and stir to coat. Add tomatoes, potatoes and water, then simmer " +
+                        "until the chicken and potatoes are cooked and the curry is thick. Hollow " +
+                        "out the bread loaf, fill it with curry and serve with the bread centre.",
+                new String[][]{{"bread", "1", "loaf"}, {"chicken", "500", "g"},
+                        {"onion", "1", "pieces"}, {"garlic", "2", "cloves"},
+                        {"potatoes", "2", "pieces"}, {"tomatoes", "250", "g"},
+                        {"curry powder", "1", "tbsp"}, {"vegetable oil", "15", "ml"},
+                        {"water", "250", "ml"}});
+
+        addRecipe(db, "Vetkoek (Amagwinya)",
+                "Mix the flour, yeast, sugar and salt. Add warm water and knead to a soft " +
+                        "dough. Cover and leave in a warm place until doubled in size. Shape " +
+                        "into balls and deep-fry in hot oil until puffed and golden, turning " +
+                        "once. Drain and serve plain or filled with savoury mince.",
+                new String[][]{{"flour", "500", "g"}, {"instant yeast", "7", "g"},
+                        {"sugar", "15", "g"}, {"salt", "5", "g"},
+                        {"water", "300", "ml"}, {"vegetable oil", "1000", "ml"}});
+
+        addRecipe(db, "Malva Pudding",
+                "Beat the eggs and sugar until pale, then mix in apricot jam, milk and vinegar. " +
+                        "Fold in flour and bicarbonate of soda and bake until springy. Heat the " +
+                        "cream, butter and sugar for the sauce, pour it over the hot pudding, " +
+                        "and allow it to soak in before serving.",
+                new String[][]{{"eggs", "2", "pieces"}, {"sugar", "300", "g"},
+                        {"apricot jam", "30", "g"}, {"milk", "125", "ml"},
+                        {"vinegar", "15", "ml"}, {"flour", "250", "g"},
+                        {"bicarbonate of soda", "5", "g"}, {"cream", "250", "ml"},
+                        {"butter", "100", "g"}});
+
+        addRecipe(db, "Milk Tart (Melktert)",
+                "Rub the butter into the flour and sugar, add one egg and bring together into " +
+                        "a pastry. Press into a tart tin and bake until lightly golden. Warm the " +
+                        "milk. Whisk the remaining eggs with flour and sugar, gradually whisk " +
+                        "in the warm milk, then cook gently until thick. Pour into the crust, " +
+                        "dust with cinnamon and chill until set.",
+                new String[][]{{"flour", "300", "g"}, {"butter", "125", "g"},
+                        {"sugar", "200", "g"}, {"eggs", "4", "pieces"},
+                        {"milk", "750", "ml"}, {"cinnamon", "1", "tsp"}});
+
+        addRecipe(db, "Cape Malay Tomato Bredie",
+                "Brown the lamb in a heavy pot. Add onion and cook until softened. Add tomatoes " +
+                        "and a little water, cover and simmer slowly until the meat is tender. " +
+                        "Add potatoes partway through cooking and simmer until soft. Season and " +
+                        "serve hot, traditionally with rice.",
+                new String[][]{{"lamb", "600", "g"}, {"onion", "1", "pieces"},
+                        {"tomatoes", "500", "g"}, {"potatoes", "3", "pieces"},
+                        {"vegetable oil", "15", "ml"}, {"water", "250", "ml"},
+                        {"salt", "5", "g"}, {"black pepper", "2", "g"}});
     }
 
     private void addRecipe(SQLiteDatabase db, String name, String steps,
