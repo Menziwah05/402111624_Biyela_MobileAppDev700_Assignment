@@ -11,13 +11,16 @@
     <string name="ingredient_form_hint">Add the ingredients you have at home. All fields except expiry are required.</string>
     <string name="ingredient_name">Ingredient name</string>
     <string name="quantity">Quantity</string>
-    <string name="unit_hint">Unit (g, kg, ml, l, pieces, slices)</string>
+    <string name="unit_hint">Select a unit from the dropdown</string>
+    <string name="select_unit">Select a unit</string>
+    <string name="unit_required_error">Choose a unit from the dropdown.</string>
     <string name="expiry_hint">Expiry date (optional, YYYY-MM-DD)</string>
     <string name="cancel">Cancel</string>
     <string name="save_ingredient">Save ingredient</string>
     <string name="suggested_title">Recipes you can make</string>
     <string name="suggested_subtitle">Only complete matches are shown. No missing shopping-list items.</string>
     <string name="no_suggestions">No recipes match your pantry yet - add more ingredients or quantity.</string>
+    <string name="recipe_match_count">%1$d recipes currently match your pantry.</string>
     <string name="tap_for_recipe">Tap to view ingredients and method</string>
     <string name="back">Back</string>
     <string name="ingredients_heading">Ingredients from your pantry</string>

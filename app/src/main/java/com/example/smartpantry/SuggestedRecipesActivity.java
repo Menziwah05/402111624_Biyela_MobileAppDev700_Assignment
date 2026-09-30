@@ -22,6 +22,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity
     private DatabaseHelper databaseHelper;
     private RecipeAdapter recipeAdapter;
     private TextView emptyMessage;
+    private TextView matchSummary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity
 
         databaseHelper = new DatabaseHelper(this);
         emptyMessage = findViewById(R.id.textNoSuggestions);
+        matchSummary = findViewById(R.id.textRecipeMatchSummary);
         RecyclerView recipeList = findViewById(R.id.recyclerSuggestedRecipes);
         recipeList.setLayoutManager(new LinearLayoutManager(this));
         recipeAdapter = new RecipeAdapter(this);
@@ -53,6 +55,7 @@ public class SuggestedRecipesActivity extends AppCompatActivity
             }
         }
         recipeAdapter.setRecipes(suggestions);
+        matchSummary.setText(getString(R.string.recipe_match_count, suggestions.size()));
         emptyMessage.setVisibility(suggestions.isEmpty()
                 ? android.view.View.VISIBLE : android.view.View.GONE);
     }
