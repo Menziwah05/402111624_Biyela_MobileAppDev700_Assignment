@@ -18,17 +18,19 @@ video.
 2. Open **Add ingredient**.
 3. Try to save with an empty name, invalid quantity, or an impossible expiry
    date such as `2026-02-30`; show the inline error messages.
-4. Add an ingredient such as `Tomatoes`, quantity `500`, unit `g`, and a valid
-   date such as `2026-09-30`.
+4. Select the unit from the dropdown. Add an ingredient such as `Tomatoes`,
+   quantity `500`, unit `g`, and a valid date such as `2026-09-30`.
 5. Edit the new ingredient and change its quantity.
 6. Delete the ingredient and confirm that the list updates.
-7. Open **Recipes** and show the strict suggestions.
+7. Open **Recipes** and show the live match count and strict suggestions.
 8. Open one recipe and show its complete ingredient list and method.
-9. Remove or reduce one required ingredient in the pantry.
-10. Return to **Recipes** and show that the recipe disappears because it no
+9. Add the missing ingredients for **Pap and Boerewors** (including maize meal
+   or mielie meal), revisit **Recipes**, and show the new strict match.
+10. Remove or reduce one required ingredient in the pantry.
+11. Return to **Recipes** and show that the recipe disappears because it no
     longer has every required ingredient in enough quantity.
-11. Open **Settings**, toggle expiry alerts, and save.
-12. Close and relaunch the app to show that the pantry data remains.
+12. Open **Settings**, toggle expiry alerts, and save.
+13. Close and relaunch the app to show that the pantry data remains.
 
 ## 3:30–4:45 — Explain the Activity and navigation design
 
@@ -59,6 +61,10 @@ Show `IngredientMatcher.java` and explain:
 - Compatible units are converted before comparison.
 - Incompatible count units, such as pieces and slices, are not treated as
   interchangeable.
+- Suggestions are recalculated from the saved pantry whenever the Recipes
+  screen opens or resumes.
+- New South African recipes are added on database upgrade without deleting the
+  existing pantry.
 
 Finish by explaining that SQLite was chosen because the app is local-first,
 does not need a server or account system, and must persist pantry data between

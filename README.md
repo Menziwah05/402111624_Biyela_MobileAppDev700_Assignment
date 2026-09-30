@@ -14,15 +14,22 @@ can be made immediately from those ingredients.
 - Custom `RecyclerView.Adapter` for pantry items and recipes.
 - Intent navigation between Activities.
 - Form validation for name, quantity, and unit.
+- Unit selection from a dropdown with common kitchen units.
 - Optional expiry dates are validated as real calendar dates in `YYYY-MM-DD`
   format, with an inline error shown before saving invalid input.
-- 18 pre-loaded recipes with ingredients and preparation steps.
+- 26 pre-loaded recipes with ingredients and preparation steps, including
+  chakalaka, pap and boerewors, bobotie, bunny chow, vetkoek, malva pudding,
+  melktert and Cape Malay tomato bredie.
 - Strict matching checks every recipe ingredient and required quantity.
 - Ingredient matching handles common plural forms such as `tomato` and
   `tomatoes`.
 - Compatible units are converted before comparison, including g/kg and ml/l;
   incompatible count units such as pieces and slices are not mixed.
 - Empty suggestions feedback instead of a blank screen.
+- Suggestions are recalculated from the saved pantry each time the Recipes
+  screen opens or resumes, and the screen shows the current number of matches.
+- Database upgrades add the South African recipes without deleting existing
+  pantry records.
 - No maps, GPS, location, shopping, payment, or external recipe API features.
 
 ## Open and run
@@ -33,9 +40,24 @@ can be made immediately from those ingredients.
 4. Press Run.
 
 The app uses SQLite on the device. The first database creation seeds a small
-sample pantry and 18 recipes so the recipe screen has useful content on the
+sample pantry and 26 recipes so the recipe screen has useful content on the
 first launch. Users can edit or delete the sample ingredients and add their
 own.
+
+On devices upgrading from the previous database version, the new South African
+recipe collection is added without clearing the user's pantry. A recipe only
+appears after every required ingredient and quantity is present.
+
+### South African recipe references
+
+The local recipes are concise app-friendly adaptations based on traditional
+dishes. Research references:
+
+- [Pap, wors and chakalaka — SBS Food](https://www.sbs.com.au/food/recipe/pap-wors-chakalaka/tu56uqqv9)
+- [Spicy chakalaka — Food & Home](https://www.foodandhome.co.za/recipes/spicy-chakalaka)
+- [South African bobotie — BBC Food](https://www.bbc.co.uk/food/recipes/bobotie_95101)
+- [South African heritage dishes — TASTE](https://taste.co.za/15-south-african-heritage-recipes-as-voted-for-by-you)
+- [Traditional malva pudding — TASTE](https://taste.co.za/recipes/traditional-malva-pudding)
 
 ## Verification
 
@@ -76,9 +98,11 @@ tomatoes, but a recipe with any other missing ingredient is excluded.
 ## Suggested demonstration flow
 
 1. Open Pantry and show the seeded items.
-2. Add an ingredient and show it in the RecyclerView.
+2. Add an ingredient, select its unit from the dropdown, and show it in the
+   RecyclerView.
 3. Edit its quantity, then delete it.
-4. Open Recipes and show only recipes that currently pass strict matching.
+4. Open Recipes and show the live match count and only recipes that currently
+   pass strict matching.
 5. Delete or reduce one ingredient and reopen Recipes to show a recipe
    disappear because a requirement is no longer satisfied.
 6. Open a recipe detail screen.
