@@ -36,6 +36,10 @@ public final class IngredientMatcher {
         String name = rawName.toLowerCase(Locale.ROOT).trim()
                 .replaceAll("[^a-z0-9 ]", "")
                 .replaceAll("\\s+", " ");
+        if (name.equals("maize meal") || name.equals("mealie meal")
+                || name.equals("mielie meal") || name.equals("corn meal")) {
+            return "maize meal";
+        }
         if (name.endsWith("ies") && name.length() > 3) {
             return name.substring(0, name.length() - 3) + "y";
         }

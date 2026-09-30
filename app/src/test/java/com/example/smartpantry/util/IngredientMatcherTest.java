@@ -48,6 +48,23 @@ public class IngredientMatcherTest {
         )));
     }
 
+    @Test
+    public void recipeBecomesSuggestedWhenPantryHasEveryRequiredItem() {
+        Recipe recipe = recipe("Pap and Boerewors", new String[][]{
+                {"maize meal", "480", "g"},
+                {"boerewors", "500", "g"}
+        });
+
+        assertFalse(IngredientMatcher.canMakeRecipe(recipe, Collections.singletonList(
+                new PantryItem("mielie meal", 0.5, "kg", "")
+        )));
+
+        assertTrue(IngredientMatcher.canMakeRecipe(recipe, Arrays.asList(
+                new PantryItem("mielie meal", 0.5, "kg", ""),
+                new PantryItem("boerewors", 500, "g", "")
+        )));
+    }
+
     private Recipe recipe(String name, String[][] ingredients) {
         Recipe recipe = new Recipe(1, name, "Prepare the ingredients.");
         for (String[] ingredient : ingredients) {
